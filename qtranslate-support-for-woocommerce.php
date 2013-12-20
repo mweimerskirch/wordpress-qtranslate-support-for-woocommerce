@@ -33,3 +33,22 @@ add_filter('woocommerce_attribute_label', 'qtrans_useCurrentLanguageIfNotFoundUs
 add_filter('woocommerce_variation_option_name', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage', 0);
 add_filter('woocommerce_page_title', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage', 0);
 
+
+/* Replace the "sanitize_title" filter from qTranslate with a custom implementation that prevents accents to be replaced language-specifically as this leads to problems with product attributes in WooCommerce. */
+remove_filter('sanitize_title', 'qtrans_useRawTitle', 0, 3);
+add_filter('sanitize_title', 'qwc_useRawTitle', -10, 3);
+function qwc_useRawTitle($title, $raw_title = '', $context = 'save') {
+	if('save' == $context) {
+		if ($raw_title == '') $raw_title = $title;
+		$raw_title = qtrans_useDefaultLanguage($raw_title);
+
+		// Temporarily set a dummy language so the "remove_accents" method is not language-specific
+		add_filter('locale', 'qwc_returnDummyLanguage', 100);
+
+		$title = remove_accents($raw_title);
+
+		// Restore the return value of the "get_locale()" method
+		remove_filter('locale', 'qwc_returnDummyLanguage', 100);
+	}
+	return $title;
+}
