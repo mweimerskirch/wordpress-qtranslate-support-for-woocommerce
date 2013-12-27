@@ -52,3 +52,14 @@ function qwc_useRawTitle($title, $raw_title = '', $context = 'save') {
 	}
 	return $title;
 }
+
+/* Fix the categories displayed on the single product pages */
+add_filter('get_the_terms', 'qwc_get_the_terms');
+function qwc_get_the_terms ($terms) {
+	foreach($terms as $term) {
+		if($term->taxonomy == 'product_cat') {
+			$term->name = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($term->name);
+		}
+	}
+	return $terms;
+}
