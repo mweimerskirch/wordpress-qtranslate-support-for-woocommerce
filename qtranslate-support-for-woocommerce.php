@@ -52,6 +52,7 @@ function qwc_useRawTitle($title, $raw_title = '', $context = 'save') {
 	}
 	return $title;
 }
+function qwc_returnDummyLanguage() { return 'dummy'; }
 
 /* Fix the categories displayed on the single product pages */
 add_filter('get_the_terms', 'qwc_get_the_terms');
