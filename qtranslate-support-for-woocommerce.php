@@ -74,3 +74,14 @@ function qwc_get_term ($term) {
         return $term;
 }
 
+/* Fix the product categories displayed in the breadcrumbs */
+add_filter('wp_get_object_terms', 'qwc_wp_get_object_terms');
+function qwc_wp_get_object_terms($terms) {
+        foreach($terms as $term) {
+                if($term->taxonomy == 'product_cat') {
+                        $term->name = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($term->name);
+                }
+        }
+        return $terms;
+}
+
