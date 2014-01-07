@@ -64,3 +64,13 @@ function qwc_get_the_terms ($terms) {
 	}
 	return $terms;
 }
+
+/* Fix the product attributes displayed in the cart */
+add_filter('get_term', 'qwc_get_term');
+function qwc_get_term ($term) {
+        if(substr($term->taxonomy, 0, 3) == 'pa_') {
+                $term->name = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($term->name);
+        }
+        return $term;
+}
+
