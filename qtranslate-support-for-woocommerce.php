@@ -85,3 +85,12 @@ function qwc_wp_get_object_terms($terms) {
         return $terms;
 }
 
+/* Fix the product attributes displayed in the "additional informations" tab */
+add_filter('woocommerce_attribute', 'qwc_woocommerce_attribute');
+function qwc_woocommerce_attribute($text) {
+        $values = explode(', ', $text);
+        foreach($values as $i=>$val) {
+                $values[$i] = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($val);
+        }
+        return implode(', ', $values);
+}
