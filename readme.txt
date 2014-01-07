@@ -22,10 +22,10 @@ I won't answer to requests in the support forum.
 
 == Changelog ==
 
-= 1.0.1 =
-* Bugfix
-
 = 1.0.2 =
 * Fix for the product attributes displayed in the cart
 * Fix for the product categories displayed in the breadcrumbs
 * Fix for the product attributes displayed in the "additional informations" tab
+
+= 1.0.1 =
+* Bugfix
