@@ -2,7 +2,7 @@
 Tags: qtranslate, woocommerce
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: MIT
 License URI: http://plugins.svn.wordpress.org/qtranslate-support-for-woocommerce/trunk/LICENSE
 
@@ -24,3 +24,8 @@ I won't answer to requests in the support forum.
 
 = 1.0.1 =
 * Bugfix
+
+= 1.0.2 =
+* Fix for the product attributes displayed in the cart
+* Fix for the product categories displayed in the breadcrumbs
+* Fix for the product attributes displayed in the "additional informations" tab
