@@ -20,6 +20,12 @@ To report a bug or contribute to the plugin, please create an issue at the proje
 
 I won't answer to requests in the support forum.
 
+= Known issues =
+* The plugin only works with "URL Modification Mode" set to "Use Pre-Path Mode" in the qTranslate settings.
+* You need to fill out the WooCommerce-related fields ("Product category base", "Product tag base", "Product attribute base") in the permalink settings. Otherwise the link structure changes between languages, leading to 404 errors.
+* Using HTTPS only for the checkout pages leads to incorrect redirections. The suggested workaround is to enable HTTPS for the entire site.
+* Categories/Attributes/etc show up untranslated in the backend.
+
 == Changelog ==
 
 = 1.0.3 =
