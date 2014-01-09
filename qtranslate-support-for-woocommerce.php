@@ -106,3 +106,26 @@ function qwc_post_type_link($post_link, $post) {
 	}
 	return $post_link;
 }
+
+/* Fix HTTPS redirects (by hooking into the redirect mechanism before WooCommerce can do so) */
+add_action('template_redirect', 'qwc_template_redirect', 0);
+function qwc_template_redirect() {
+	if (
+		get_option('woocommerce_force_ssl_checkout') == 'yes' && ! is_ssl() &&
+		(is_checkout() || is_account_page() || apply_filters('woocommerce_force_ssl_checkout', false))
+	) {
+		$url = get_permalink();
+		$url = preg_replace('|^http://|', 'https://', $url);
+		wp_safe_redirect($url);
+		die();
+	}
+
+	if (
+		get_option('woocommerce_force_ssl_checkout') == 'yes' && get_option('woocommerce_unforce_ssl_checkout') == 'yes' && is_ssl() && $_SERVER['REQUEST_URI'] && ! is_checkout() && ! is_page(woocommerce_get_page_id('thanks')) && ! is_ajax() && !is_account_page() && apply_filters( 'woocommerce_unforce_ssl_checkout', true)
+	) {
+		$url = get_permalink();
+		$url = preg_replace('|^https://|', 'http://', $url);
+		wp_safe_redirect($url);
+		die();
+	}
+}
