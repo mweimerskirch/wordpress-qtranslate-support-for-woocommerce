@@ -3,7 +3,7 @@
 Plugin Name: qTranslate support for WooCommerce
 Plugin URI: https://github.com/mweimerskirch/wordpress-qtranslate-support-for-woocommerce
 Description: Makes qTranslate work with WooCommerce
-Version: 1.0.3
+Version: 1.0.4
 Author: Michel Weimerskirch
 Author URI: http://michel.weimerskirch.net
 License: MIT
@@ -74,11 +74,11 @@ function qwc_get_term ($term) {
         return $term;
 }
 
-/* Fix the product categories displayed in the breadcrumbs */
+/* Fix the product categories and tags */
 add_filter('wp_get_object_terms', 'qwc_wp_get_object_terms');
 function qwc_wp_get_object_terms($terms) {
         foreach($terms as $term) {
-                if($term->taxonomy == 'product_cat') {
+                if($term->taxonomy == 'product_cat' || $term->taxonomy == 'product_tag') {
                         $term->name = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($term->name);
                 }
         }
