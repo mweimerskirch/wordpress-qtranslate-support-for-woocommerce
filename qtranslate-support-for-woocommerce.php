@@ -3,7 +3,7 @@
 Plugin Name: qTranslate support for WooCommerce
 Plugin URI: https://github.com/mweimerskirch/wordpress-qtranslate-support-for-woocommerce
 Description: Makes qTranslate work with WooCommerce
-Version: 1.0.2
+Version: 1.0.3
 Author: Michel Weimerskirch
 Author URI: http://michel.weimerskirch.net
 License: MIT
@@ -93,4 +93,16 @@ function qwc_woocommerce_attribute($text) {
                 $values[$i] = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($val);
         }
         return implode(', ', $values);
+}
+
+/* Fix the "add to cart" button in the product list */
+add_filter('woocommerce_add_to_cart_url', 'qtrans_convertURL');
+
+/* Fix the product links (in the cart and possibly other places) */
+add_filter('post_type_link', 'qwc_post_type_link', 10, 2);
+function qwc_post_type_link($post_link, $post) {
+	if($post->post_type == 'product') {
+		$post_link = qtrans_convertURL($post_link);
+	}
+	return $post_link;
 }
