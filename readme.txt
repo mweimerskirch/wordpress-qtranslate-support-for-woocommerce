@@ -28,6 +28,9 @@ I won't answer to requests in the support forum.
 
 == Changelog ==
 
+= 1.0.4+ =
+* Rewrite post titles when items are sent to paypal during checkout (contributed by @deweydb)
+
 = 1.0.4 =
 * Fix for the tag display
 

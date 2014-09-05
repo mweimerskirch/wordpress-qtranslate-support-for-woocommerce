@@ -107,12 +107,9 @@ function qwc_post_type_link($post_link, $post) {
 	return $post_link;
 }
 
-/*
-* Rewrite post titles when items are sent to paypal during checkout
-* Use current language if found, if not use default language
-*/
+/* Rewrite post titles when items are sent to paypal during checkout */
+add_filter( 'woocommerce_paypal_args', 'woocommerce_paypal_qtranslate_product_name' );
 function woocommerce_paypal_qtranslate_product_name($paypal_args){
-	$lang = qtrans_getLanguage();
 	foreach($paypal_args as $key=>$value){
 		if(strpos($key, 'item_name_') !== false){
 			$paypal_args[$key] = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($paypal_args[$key]);
@@ -120,4 +117,3 @@ function woocommerce_paypal_qtranslate_product_name($paypal_args){
 	}
 	return $paypal_args;
 }
-add_filter( 'woocommerce_paypal_args', 'woocommerce_paypal_qtranslate_product_name' );
