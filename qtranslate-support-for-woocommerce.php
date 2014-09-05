@@ -3,7 +3,7 @@
 Plugin Name: qTranslate support for WooCommerce
 Plugin URI: https://github.com/mweimerskirch/wordpress-qtranslate-support-for-woocommerce
 Description: Makes qTranslate work with WooCommerce
-Version: 1.0.5
+Version: 1.0.6
 Author: Michel Weimerskirch
 Author URI: http://michel.weimerskirch.net
 License: MIT
@@ -13,7 +13,9 @@ License: MIT
 add_action('woocommerce_before_subcategory', 'qtrans_woocommerce_before_subcategory');
 function qtrans_woocommerce_before_subcategory($category)
 {
-	$category->name = __($category->name);
+	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return $category;
+
+	$category->name = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($category->name);
 	return $category;
 }
 
@@ -44,7 +46,7 @@ remove_filter('sanitize_title', 'qtrans_useRawTitle', 0, 3);
 add_filter('sanitize_title', 'qwc_useRawTitle', -10, 3);
 function qwc_useRawTitle($title, $raw_title = '', $context = 'save')
 {
-	if (!function_exists('qtrans_useDefaultLanguage')) return;
+	if (!function_exists('qtrans_useDefaultLanguage')) return $title;
 
 	if ('save' == $context) {
 		if ($raw_title == '') $raw_title = $title;
@@ -70,7 +72,7 @@ function qwc_returnDummyLanguage()
 add_filter('get_the_terms', 'qwc_get_the_terms');
 function qwc_get_the_terms($terms)
 {
-	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return;
+	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return $terms;
 
 	foreach ($terms as $term) {
 		if ($term->taxonomy == 'product_cat') {
@@ -84,7 +86,7 @@ function qwc_get_the_terms($terms)
 add_filter('get_term', 'qwc_get_term');
 function qwc_get_term($term)
 {
-	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return;
+	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return $term;
 
 	if (substr($term->taxonomy, 0, 3) == 'pa_') {
 		$term->name = qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage($term->name);
@@ -96,7 +98,7 @@ function qwc_get_term($term)
 add_filter('wp_get_object_terms', 'qwc_wp_get_object_terms');
 function qwc_wp_get_object_terms($terms)
 {
-	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return;
+	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return $terms;
 
 	foreach ($terms as $term) {
 		if ($term->taxonomy == 'product_cat' || $term->taxonomy == 'product_tag') {
@@ -110,7 +112,7 @@ function qwc_wp_get_object_terms($terms)
 add_filter('woocommerce_attribute', 'qwc_woocommerce_attribute');
 function qwc_woocommerce_attribute($text)
 {
-	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return;
+	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return $text;
 
 	$values = explode(', ', $text);
 	foreach ($values as $i => $val) {
@@ -126,7 +128,7 @@ add_filter('woocommerce_add_to_cart_url', 'qtrans_convertURL');
 add_filter('post_type_link', 'qwc_post_type_link', 10, 2);
 function qwc_post_type_link($post_link, $post)
 {
-	if (!function_exists('qtrans_convertURL')) return;
+	if (!function_exists('qtrans_convertURL')) return $post_link;
 
 	if ($post->post_type == 'product') {
 		$post_link = qtrans_convertURL($post_link);
@@ -138,7 +140,7 @@ function qwc_post_type_link($post_link, $post)
 add_filter('woocommerce_paypal_args', 'woocommerce_paypal_qtranslate_product_name');
 function woocommerce_paypal_qtranslate_product_name($paypal_args)
 {
-	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return;
+	if (!function_exists('qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage')) return $paypal_args;
 
 	foreach ($paypal_args as $key => $value) {
 		if (strpos($key, 'item_name_') !== false) {
