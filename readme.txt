@@ -30,6 +30,7 @@ I won't answer to requests in the support forum.
 
 = 1.0.4+ =
 * Rewrite post titles when items are sent to paypal during checkout (contributed by @deweydb)
+* Check if qTranslate functions exist before executing the filters (prevents sites from breaking during upgrades)
 
 = 1.0.4 =
 * Fix for the tag display
