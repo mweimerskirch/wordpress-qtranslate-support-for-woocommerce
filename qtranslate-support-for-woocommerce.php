@@ -3,7 +3,7 @@
 Plugin Name: qTranslate support for WooCommerce
 Plugin URI: https://github.com/mweimerskirch/wordpress-qtranslate-support-for-woocommerce
 Description: Makes qTranslate work with WooCommerce
-Version: 1.0.4
+Version: 1.0.5
 Author: Michel Weimerskirch
 Author URI: http://michel.weimerskirch.net
 License: MIT
