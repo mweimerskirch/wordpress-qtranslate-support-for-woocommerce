@@ -2,7 +2,7 @@
 Tags: qtranslate, woocommerce
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: MIT
 License URI: http://plugins.svn.wordpress.org/qtranslate-support-for-woocommerce/trunk/LICENSE
 
