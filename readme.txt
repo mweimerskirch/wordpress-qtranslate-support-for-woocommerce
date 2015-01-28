@@ -28,7 +28,7 @@ I won't answer to requests in the support forum.
 
 == Changelog ==
 
-= 1.0.6 =
+= 1.0.7 =
 * Translate shippment methods
 
 = 1.0.6 =
