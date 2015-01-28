@@ -2,7 +2,7 @@
 Tags: qtranslate, woocommerce
 Requires at least: 3.0.1
 Tested up to: 3.8
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: MIT
 License URI: http://plugins.svn.wordpress.org/qtranslate-support-for-woocommerce/trunk/LICENSE
 
@@ -27,6 +27,9 @@ I won't answer to requests in the support forum.
 * Categories/Attributes/etc show up untranslated in the backend.
 
 == Changelog ==
+
+= 1.0.6 =
+* Translate shippment methods
 
 = 1.0.6 =
 * Bugfix
