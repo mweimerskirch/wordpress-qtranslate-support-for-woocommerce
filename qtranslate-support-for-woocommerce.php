@@ -39,6 +39,7 @@ add_filter('the_title_attribute', 'qtrans_useCurrentLanguageIfNotFoundUseDefault
 add_filter('woocommerce_attribute_label', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage', 0);
 add_filter('woocommerce_variation_option_name', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage', 0);
 add_filter('woocommerce_page_title', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage', 0);
+add_filter('woocommerce_cart_shipping_method_full_label', 'qtrans_useCurrentLanguageIfNotFoundUseDefaultLanguage', 0);
 
 
 /* Replace the "sanitize_title" filter from qTranslate with a custom implementation that prevents accents to be replaced language-specifically as this leads to problems with product attributes in WooCommerce. */
